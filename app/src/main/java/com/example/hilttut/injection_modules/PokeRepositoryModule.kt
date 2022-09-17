@@ -1,7 +1,7 @@
 package com.example.hilttut.injection_modules
 
-import com.example.hilttut.network.PokeApiRepository
 import com.example.hilttut.network.PokemonRepository
+import com.example.hilttut.network.repositories.PokeApiRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

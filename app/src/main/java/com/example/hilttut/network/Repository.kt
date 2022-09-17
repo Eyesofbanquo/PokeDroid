@@ -3,6 +3,7 @@ package com.example.hilttut.network
 import android.util.Log
 import androidx.lifecycle.*
 import com.example.hilttut.model.Pokemon
+import com.example.hilttut.network.repositories.PokeApiRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -12,11 +13,6 @@ import kotlinx.coroutines.*
 import javax.inject.Inject
 import javax.inject.Qualifier
 import kotlin.coroutines.CoroutineContext
-
-interface PokeApiRepository: DefaultLifecycleObserver {
-    fun getAllPokemon(): LiveData<List<Pokemon>>
-    fun registerObserver(lifecycle: Lifecycle)
-}
 
 @ActivityScoped
 class PokemonRepository @Inject constructor(

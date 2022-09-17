@@ -13,6 +13,7 @@ import com.example.hilttut.injection_modules.PokemonRepositoryQualifier
 import com.example.hilttut.model.Person
 import com.example.hilttut.model.SpanishQualiifier
 import com.example.hilttut.network.*
+import com.example.hilttut.network.repositories.PokeApiRepository
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
 import javax.inject.Inject
