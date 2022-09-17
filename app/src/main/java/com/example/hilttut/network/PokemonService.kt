@@ -1,18 +1,8 @@
 package com.example.hilttut.network
 
-import com.example.hilttut.model.Pokemon
-import com.example.hilttut.model.PokemonSprite
-import com.example.hilttut.network.RetrofitHelper.baseUrl
 import com.example.hilttut.network.responses.AllPokemonResponse
 import com.example.hilttut.network.responses.PokemonFormResponse
-import com.squareup.moshi.Json
-import dagger.Module
-import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityComponent
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Path
 
@@ -23,21 +13,5 @@ interface PokemonService {
     suspend fun getSpecificPokemonForm(@Path("id") id: String): Response<PokemonFormResponse>
 }
 
-@Module
-@InstallIn(ActivityComponent::class)
-object RetrofitHelper {
-    const val baseUrl: String = "https://pokeapi.co/"
 
-    private fun getInstance(): Retrofit {
-        return Retrofit.Builder().baseUrl(baseUrl)
-            .addConverterFactory(MoshiConverterFactory.create())
-            .build()
-    }
-
-    @Provides
-    fun makePokemonService(): PokemonService {
-        return getInstance()
-            .create(PokemonService::class.java)
-    }
-}
 
