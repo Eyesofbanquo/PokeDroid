@@ -1,6 +1,7 @@
 package com.example.hilttut.network
 
 import com.example.hilttut.model.Pokemon
+import com.example.hilttut.model.PokemonSprite
 import com.example.hilttut.network.RetrofitHelper.baseUrl
 import com.example.hilttut.network.responses.AllPokemonResponse
 import com.squareup.moshi.Json
@@ -16,8 +17,8 @@ import retrofit2.http.Path
 
 /* /pokemon-form/$index} */
 data class PokemonFormResponse(@field:Json(name="pokemon") val pokemon: Pokemon,
-                               @field:Json(name="sprites") val sprites: PokemonSprite)
-data class PokemonSprite(@field:Json(name="front_default") val default: String)
+                               @field:Json(name="sprites") val sprites: PokemonSprite
+)
 
 interface PokemonService {
     @GET("/api/v2/pokemon")
