@@ -67,7 +67,6 @@ class PokemonRepository @Inject constructor(
         val pokemons = withContext(Dispatchers.IO) {
             var pokemonResponse: MutableList<Pokemon> = mutableListOf()
             for (index in listOfIndices) {
-                val result = pokemonService.getSpecificPokemon(index)
                 val formResult = pokemonService.getSpecificPokemonForm(index)
 
                 val specificPokemonFormResult = formResult.body()

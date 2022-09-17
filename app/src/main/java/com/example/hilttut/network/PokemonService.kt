@@ -14,14 +14,6 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Path
 
-/* To get a specific pokemon. Using /pokemon/${index} */
-data class PokemonResponse (
-    @field:Json(name="forms")
-    val form: List<PokemonForm>
-    )
-data class PokemonForm(@field:Json(name="name") val name: String,
-                       @field:Json(name="url") val url: String)
-
 /* /pokemon-form/$index} */
 data class PokemonFormResponse(@field:Json(name="pokemon") val pokemon: Pokemon,
                                @field:Json(name="sprites") val sprites: PokemonSprite)
@@ -30,8 +22,6 @@ data class PokemonSprite(@field:Json(name="front_default") val default: String)
 interface PokemonService {
     @GET("/api/v2/pokemon")
     suspend fun getPokemon(): Response<AllPokemonResponse>
-    @GET("/api/v2/pokemon/{id}")
-    suspend fun getSpecificPokemon(@Path("id") id: String): Response<PokemonResponse>
     @GET("/api/v2/pokemon-form/{id}")
     suspend fun getSpecificPokemonForm(@Path("id") id: String): Response<PokemonFormResponse>
 }
