@@ -2,6 +2,7 @@ package com.example.hilttut.network
 
 import com.example.hilttut.model.Pokemon
 import com.example.hilttut.network.RetrofitHelper.baseUrl
+import com.example.hilttut.network.responses.AllPokemonResponse
 import com.squareup.moshi.Json
 import dagger.Module
 import dagger.Provides
@@ -12,13 +13,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Path
-
-data class PokemonList(
-    @field:Json(name="count")
-    val count: Int,
-    @field:Json(name="results")
-    val results: List<Pokemon>
-)
 
 /* To get a specific pokemon. Using /pokemon/${index} */
 data class PokemonResponse (
@@ -35,7 +29,7 @@ data class PokemonSprite(@field:Json(name="front_default") val default: String)
 
 interface PokemonService {
     @GET("/api/v2/pokemon")
-    suspend fun getPokemon(): Response<PokemonList>
+    suspend fun getPokemon(): Response<AllPokemonResponse>
     @GET("/api/v2/pokemon/{id}")
     suspend fun getSpecificPokemon(@Path("id") id: String): Response<PokemonResponse>
     @GET("/api/v2/pokemon-form/{id}")

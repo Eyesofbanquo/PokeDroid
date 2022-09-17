@@ -70,7 +70,6 @@ class PokemonRepository @Inject constructor(
                 val result = pokemonService.getSpecificPokemon(index)
                 val formResult = pokemonService.getSpecificPokemonForm(index)
 
-                val specificPokemonResult = result.body()?.form
                 val specificPokemonFormResult = formResult.body()
                 val name = specificPokemonFormResult?.pokemon?.name ?: ""
                 val sprite = specificPokemonFormResult?.sprites?.default ?: ""
