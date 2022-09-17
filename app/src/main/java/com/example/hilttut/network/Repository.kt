@@ -2,6 +2,8 @@ package com.example.hilttut.network
 
 import android.util.Log
 import androidx.lifecycle.*
+import com.example.hilttut.model.Pokemon
+import com.example.hilttut.network.repositories.PokeApiRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -12,29 +14,13 @@ import javax.inject.Inject
 import javax.inject.Qualifier
 import kotlin.coroutines.CoroutineContext
 
-interface Repository: DefaultLifecycleObserver {
-    fun getAllPokemon(): LiveData<List<PokemonListResponse>>
-    fun registerObserver(lifecycle: Lifecycle)
-}
-
-@Qualifier
-annotation class PokemonRepositoryQualfier
-
-@Module
-@InstallIn(ActivityComponent::class)
-abstract class RepositoryModule {
-    @PokemonRepositoryQualfier
-    @Binds
-    abstract fun makePokemonRepository(pokemonRepository: PokemonRepository): Repository
-}
-
 @ActivityScoped
 class PokemonRepository @Inject constructor(
     var pokemonService: PokemonService
-) : Repository, CoroutineScope {
+) : PokeApiRepository, CoroutineScope {
 
     // region Properties
-    private var pokemon = MutableLiveData<List<PokemonListResponse>>()
+    private var pokemon = MutableLiveData<List<Pokemon>>()
     private val job: Job = Job()
     // endregion
 
@@ -64,17 +50,15 @@ class PokemonRepository @Inject constructor(
         Log.i("Tags", listOfIndices.toString())
 
         val pokemons = withContext(Dispatchers.IO) {
-            var pokemonResponse: MutableList<PokemonListResponse> = mutableListOf()
+            var pokemonResponse: MutableList<Pokemon> = mutableListOf()
             for (index in listOfIndices) {
-                val result = pokemonService.getSpecificPokemon(index)
                 val formResult = pokemonService.getSpecificPokemonForm(index)
 
-                val specificPokemonResult = result.body()?.form
                 val specificPokemonFormResult = formResult.body()
                 val name = specificPokemonFormResult?.pokemon?.name ?: ""
                 val sprite = specificPokemonFormResult?.sprites?.default ?: ""
                 Log.i("Named", specificPokemonFormResult.toString())
-                val returnedPokemon = PokemonListResponse(name, sprite)
+                val returnedPokemon = Pokemon(name, sprite)
                 pokemonResponse.add(returnedPokemon)
             }
             Log.i("Pokemons", "Returned")
@@ -87,10 +71,6 @@ class PokemonRepository @Inject constructor(
         pokemon.value = pokemons
     }
 
-    private suspend fun fetchAllIndividualPokemon(index: String) {
-
-    }
-
     private fun cancelJob() {
         if (job.isActive) {
             job.cancel()
@@ -99,7 +79,7 @@ class PokemonRepository @Inject constructor(
 
     // region Overrides
 
-    override fun getAllPokemon(): LiveData<List<PokemonListResponse>> {
+    override fun getAllPokemon(): LiveData<List<Pokemon>> {
         launch { fetchPokemonList() }
         return pokemon
     }
