@@ -1,0 +1,67 @@
+package com.example.hilttut.network
+
+import com.example.hilttut.network.RetrofitHelper.baseUrl
+import com.squareup.moshi.Json
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ActivityComponent
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.moshi.MoshiConverterFactory
+import retrofit2.http.GET
+import retrofit2.http.Path
+
+data class PokemonList(
+    @field:Json(name="count")
+    val count: Int,
+    @field:Json(name="results")
+    val results: List<PokemonListResponse>
+)
+data class PokemonListResponse (
+    @field:Json(name="name")
+    val name: String,
+    @field:Json(name="url")
+    val url: String
+    )
+
+/* To get a specific pokemon. Using /pokemon/${index} */
+data class PokemonResponse (
+    @field:Json(name="forms")
+    val form: List<PokemonForm>
+    )
+data class PokemonForm(@field:Json(name="name") val name: String,
+                       @field:Json(name="url") val url: String)
+
+/* /pokemon-form/$index} */
+data class PokemonFormResponse(@field:Json(name="pokemon") val pokemon: PokemonListResponse,
+                               @field:Json(name="sprites") val sprites: PokemonSprite)
+data class PokemonSprite(@field:Json(name="front_default") val default: String)
+
+interface PokemonService {
+    @GET("/api/v2/pokemon")
+    suspend fun getPokemon(): Response<PokemonList>
+    @GET("/api/v2/pokemon/{id}")
+    suspend fun getSpecificPokemon(@Path("id") id: String): Response<PokemonResponse>
+    @GET("/api/v2/pokemon-form/{id}")
+    suspend fun getSpecificPokemonForm(@Path("id") id: String): Response<PokemonFormResponse>
+}
+
+@Module
+@InstallIn(ActivityComponent::class)
+object RetrofitHelper {
+    const val baseUrl: String = "https://pokeapi.co/"
+
+    private fun getInstance(): Retrofit {
+        return Retrofit.Builder().baseUrl(baseUrl)
+            .addConverterFactory(MoshiConverterFactory.create())
+            .build()
+    }
+
+    @Provides
+    fun makePokemonService(): PokemonService {
+        return getInstance()
+            .create(PokemonService::class.java)
+    }
+}
+
