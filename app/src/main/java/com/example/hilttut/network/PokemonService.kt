@@ -4,6 +4,7 @@ import com.example.hilttut.model.Pokemon
 import com.example.hilttut.model.PokemonSprite
 import com.example.hilttut.network.RetrofitHelper.baseUrl
 import com.example.hilttut.network.responses.AllPokemonResponse
+import com.example.hilttut.network.responses.PokemonFormResponse
 import com.squareup.moshi.Json
 import dagger.Module
 import dagger.Provides
@@ -14,11 +15,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Path
-
-/* /pokemon-form/$index} */
-data class PokemonFormResponse(@field:Json(name="pokemon") val pokemon: Pokemon,
-                               @field:Json(name="sprites") val sprites: PokemonSprite
-)
 
 interface PokemonService {
     @GET("/api/v2/pokemon")
