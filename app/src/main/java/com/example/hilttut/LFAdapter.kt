@@ -8,7 +8,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.example.hilttut.network.PokemonListResponse
+import com.example.hilttut.model.Pokemon
 
 class LFViewHolder(val view: View): RecyclerView.ViewHolder(view) {
     val textView: TextView = view.findViewById(R.id.itemTextView)
@@ -17,9 +17,9 @@ class LFViewHolder(val view: View): RecyclerView.ViewHolder(view) {
 
 class LFAdapter: RecyclerView.Adapter<LFViewHolder>() {
 
-    private var _data: List<PokemonListResponse> = listOf()
+    private var _data: List<Pokemon> = listOf()
 
-    fun setPokemon(newPokemon: List<PokemonListResponse>){
+    fun setPokemon(newPokemon: List<Pokemon>){
         _data = newPokemon
     }
 

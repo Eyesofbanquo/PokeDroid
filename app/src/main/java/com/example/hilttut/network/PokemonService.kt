@@ -1,5 +1,6 @@
 package com.example.hilttut.network
 
+import com.example.hilttut.model.Pokemon
 import com.example.hilttut.network.RetrofitHelper.baseUrl
 import com.squareup.moshi.Json
 import dagger.Module
@@ -16,14 +17,8 @@ data class PokemonList(
     @field:Json(name="count")
     val count: Int,
     @field:Json(name="results")
-    val results: List<PokemonListResponse>
+    val results: List<Pokemon>
 )
-data class PokemonListResponse (
-    @field:Json(name="name")
-    val name: String,
-    @field:Json(name="url")
-    val url: String
-    )
 
 /* To get a specific pokemon. Using /pokemon/${index} */
 data class PokemonResponse (
@@ -34,7 +29,7 @@ data class PokemonForm(@field:Json(name="name") val name: String,
                        @field:Json(name="url") val url: String)
 
 /* /pokemon-form/$index} */
-data class PokemonFormResponse(@field:Json(name="pokemon") val pokemon: PokemonListResponse,
+data class PokemonFormResponse(@field:Json(name="pokemon") val pokemon: Pokemon,
                                @field:Json(name="sprites") val sprites: PokemonSprite)
 data class PokemonSprite(@field:Json(name="front_default") val default: String)
 
