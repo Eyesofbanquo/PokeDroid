@@ -13,26 +13,15 @@ import javax.inject.Inject
 import javax.inject.Qualifier
 import kotlin.coroutines.CoroutineContext
 
-interface Repository: DefaultLifecycleObserver {
+interface PokeApiRepository: DefaultLifecycleObserver {
     fun getAllPokemon(): LiveData<List<Pokemon>>
     fun registerObserver(lifecycle: Lifecycle)
-}
-
-@Qualifier
-annotation class PokemonRepositoryQualfier
-
-@Module
-@InstallIn(ActivityComponent::class)
-abstract class RepositoryModule {
-    @PokemonRepositoryQualfier
-    @Binds
-    abstract fun makePokemonRepository(pokemonRepository: PokemonRepository): Repository
 }
 
 @ActivityScoped
 class PokemonRepository @Inject constructor(
     var pokemonService: PokemonService
-) : Repository, CoroutineScope {
+) : PokeApiRepository, CoroutineScope {
 
     // region Properties
     private var pokemon = MutableLiveData<List<Pokemon>>()

@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.hilttut.injection_modules.PokemonRepositoryQualifier
 import com.example.hilttut.model.Person
 import com.example.hilttut.model.SpanishQualiifier
 import com.example.hilttut.network.*
@@ -31,9 +32,9 @@ class ListFragment : Fragment() {
     @Inject
     lateinit var pokemonService: PokemonService
 
-    @PokemonRepositoryQualfier
+    @PokemonRepositoryQualifier
     @Inject
-    lateinit var pokemonRepository: Repository
+    lateinit var pokemonRepository: PokeApiRepository
 
     private lateinit var recyclerView:RecyclerView
     private val recyclerViewAdapter: LFAdapter = LFAdapter()
