@@ -1,10 +1,10 @@
-package com.example.hilttut
+package com.example.hilttut.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
-import android.widget.Toast
+import com.example.hilttut.R
 import com.example.hilttut.model.*
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
