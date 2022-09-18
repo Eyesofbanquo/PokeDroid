@@ -11,8 +11,6 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-//    private lateinit var spanishPerson: SpanishPerson
-
     @SpanishQualiifier
     @Inject
     lateinit var spanishMan: Person
@@ -28,10 +26,6 @@ class MainActivity : AppCompatActivity() {
         spanishMan.speakLanguage()
         animal = animalCreator.create("Sparky", 24)
 
-//        launchNextButton = findViewById(R.id.launchNextActivity)
-//        launchNextButton.setOnClickListener {
-//            val intent = Intent(this, ListActivity::class.java)
-//            startActivity(intent)
-//        }
+
     }
 }
