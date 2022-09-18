@@ -3,7 +3,9 @@
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:clickable="true"
+    android:background="?attr/selectableItemBackground">
     <ImageView
         android:id="@+id/pokemonImageView"
         android:layout_width="match_parent"
@@ -16,8 +18,6 @@
     <TextView
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/itemTextView"
-        android:clickable="true"
-        android:background="?attr/selectableItemBackground"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="8dp"
