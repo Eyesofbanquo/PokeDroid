@@ -6,26 +6,27 @@
     android:layout_height="match_parent"
     tools:context=".MainFragment">
 
-    <LinearLayout
+    <ImageView
+        android:id="@+id/pokemonLogo"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginHorizontal="8dp"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Hello World!" />
-        <Button
-            android:id="@+id/launchNextActivity"
-            android:text="@string/launchNextActivity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            />
-    </LinearLayout>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/pokemon_text" />
+
+    <Button
+        android:id="@+id/launchNextActivity"
+        android:text="@string/launchNextActivity"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:layout_marginHorizontal="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
 
 
 
