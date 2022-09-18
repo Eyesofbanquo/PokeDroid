@@ -21,8 +21,6 @@ class MainActivity : AppCompatActivity() {
     lateinit var animalCreator: AnimalUtilFactory
     private lateinit var animal: Animal
 
-    private lateinit var launchNextButton: Button
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -30,10 +28,10 @@ class MainActivity : AppCompatActivity() {
         spanishMan.speakLanguage()
         animal = animalCreator.create("Sparky", 24)
 
-        launchNextButton = findViewById(R.id.launchNextActivity)
-        launchNextButton.setOnClickListener {
-            val intent = Intent(this, ListActivity::class.java)
-            startActivity(intent)
-        }
+//        launchNextButton = findViewById(R.id.launchNextActivity)
+//        launchNextButton.setOnClickListener {
+//            val intent = Intent(this, ListActivity::class.java)
+//            startActivity(intent)
+//        }
     }
 }
