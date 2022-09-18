@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import com.example.hilttut.activities.ListActivity
 import com.example.hilttut.model.SpanishPerson
 
@@ -32,8 +33,8 @@ class MainFragment: Fragment() {
 
         launchNextButton = view.findViewById(R.id.launchNextActivity)
         launchNextButton.setOnClickListener {
-            val intent = Intent(context, ListActivity::class.java)
-            startActivity(intent)
+            val action = MainFragmentDirections.actionMainFragmentToListFragment2()
+            view.findNavController().navigate(action)
         }
     }
 }
