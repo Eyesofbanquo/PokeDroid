@@ -30,9 +30,12 @@
     <fragment
         android:id="@+id/pokemonDetailFragment"
         android:name="com.example.hilttut.PokemonDetailFragment"
-        android:label="fragment_pokemon_detail"
+        android:label="@string/pokemon_detail_label"
         tools:layout="@layout/fragment_pokemon_detail" >
         <argument android:name="pokemon"
             app:argType="com.example.hilttut.model.Pokemon" />
+        <argument
+            android:name="label"
+            app:argType="string" />
     </fragment>
 </navigation>

@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.navigation.findNavController
 import com.example.hilttut.model.Pokemon
 
 // TODO: Rename parameter arguments, choose names that match
@@ -19,6 +21,8 @@ private const val POKEMON_PARAM  = "pokemon"
 class PokemonDetailFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private lateinit var pokemon: Pokemon
+
+    private lateinit var pokemonNameTextView: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,5 +39,13 @@ class PokemonDetailFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_pokemon_detail,
             container,
             false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        pokemonNameTextView = view.findViewById(R.id.pokemonNameTextView)
+        pokemonNameTextView.text = pokemon.name
+        view.findNavController().currentDestination?.label = pokemon.name
     }
 }

@@ -46,7 +46,8 @@ class LFAdapter: RecyclerView.Adapter<LFViewHolder>() {
         textView.text = holder.itemView.context.getString(R.string.pokemonName, pokemon.name)
         holder.itemView.setOnClickListener {
             val action = ListFragmentDirections
-                .actionListFragment2ToPokemonDetailFragment(pokemon)
+                .actionListFragment2ToPokemonDetailFragment(pokemon=pokemon,
+                    label=pokemon.name.uppercase())
             it.findNavController().navigate(action)
         }
     }
