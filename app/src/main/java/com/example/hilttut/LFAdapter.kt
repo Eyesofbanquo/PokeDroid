@@ -5,7 +5,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
@@ -38,7 +37,6 @@ class LFAdapter: RecyclerView.Adapter<LFViewHolder>() {
 
         val textView = holder.textView
         val imageView = holder.imageView
-
         imageView.load(pokemonImageUrl) {
             crossfade(true)
             placeholder(R.drawable.ic_launcher_background)
