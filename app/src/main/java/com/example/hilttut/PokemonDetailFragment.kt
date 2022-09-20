@@ -70,7 +70,8 @@ class PokemonDetailFragment : Fragment() {
         pokemonRepository.getSpecificPokemon(pokemon).observe(viewLifecycleOwner) {
             pokeStatsAdapter.setPokeStats(stats=it,
                 reloadData=true)
-            pokeStatsAdapter.setPokeHeader(pokemonUrl)
+            pokeStatsAdapter.setPokeHeader(headerUrlString=pokemonUrl,
+                pokemonNameParam = pokemon.name)
         }
     }
 }

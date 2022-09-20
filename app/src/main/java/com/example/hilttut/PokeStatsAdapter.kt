@@ -16,9 +16,12 @@ import dagger.hilt.android.components.FragmentComponent
 import javax.inject.Qualifier
 
 class PokeDetailView(private val view: View): RecyclerView.ViewHolder(view) {
-    fun bindHeader(pokemonImageUrl: String) {
+    fun bindHeader(pokemonImageUrl: String, pokemonName: String) {
         if (pokemonImageUrl.isNullOrEmpty()) return
         val imageView: ImageView = view.findViewById(R.id.pokemonHeaderImageView)
+        val textView: TextView = view.findViewById(R.id.pokemonHeaderTextView)
+
+        textView.text = pokemonName.uppercase()
         imageView.load(pokemonImageUrl) {
             crossfade(true)
             placeholder(R.drawable.ic_launcher_background)
@@ -44,6 +47,7 @@ class PokeStatsAdapter: RecyclerView.Adapter<PokeDetailView>() {
 
     private var _data: List<PokeStat> = listOf()
     private var headerUrl: String = ""
+    private var pokemonName: String = ""
 
     override fun onCreateViewHolder(parent: ViewGroup,
                                     viewType: Int): PokeDetailView {
@@ -59,7 +63,7 @@ class PokeStatsAdapter: RecyclerView.Adapter<PokeDetailView>() {
     override fun onBindViewHolder(holder: PokeDetailView,
                                   position: Int) {
         if (position == HEADER) {
-            holder.bindHeader(headerUrl)
+            holder.bindHeader(headerUrl, pokemonName)
         } else {
             val stat = _data[position-ROW]
             holder.bindContent(stat.stat.name, stat.baseStat)
@@ -89,8 +93,9 @@ class PokeStatsAdapter: RecyclerView.Adapter<PokeDetailView>() {
         }
     }
 
-    fun setPokeHeader(headerUrlString: String) {
+    fun setPokeHeader(headerUrlString: String, pokemonNameParam: String) {
         headerUrl = headerUrlString
+        pokemonName = pokemonNameParam
         notifyDataSetChanged()
     }
 
