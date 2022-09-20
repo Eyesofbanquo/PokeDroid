@@ -16,7 +16,7 @@ class InfoView @JvmOverloads constructor(context: Context,
 
     init {
         inflate(context, R.layout.info_view, this)
-        titleText = findViewById(R.id.title)
-        subtitleText = findViewById(R.id.subtitle)
+        titleText = findViewById(R.id.infoViewTitle)
+        subtitleText = findViewById(R.id.infoViewSubtitle)
     }
 }

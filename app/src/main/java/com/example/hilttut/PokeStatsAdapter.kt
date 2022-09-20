@@ -25,8 +25,8 @@ class PokeDetailView(private val view: View): RecyclerView.ViewHolder(view) {
         }
     }
     fun bindContent(titleString: String, subtitleString: String) {
-        val title: TextView = view.findViewById(R.id.title)
-        val subtitle: TextView = view.findViewById(R.id.subtitle)
+        val title: TextView = view.findViewById(R.id.infoViewTitle)
+        val subtitle: TextView = view.findViewById(R.id.infoViewSubtitle)
         title.text = titleString
         subtitle.text = subtitleString
 
