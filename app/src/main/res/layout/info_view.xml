@@ -1,23 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_margin="@dimen/grid"
     android:layout_width="match_parent"
     android:layout_height="150dp"
-    android:gravity="center"
     android:clickable="true"
-    android:background="?attr/selectableItemBackground">
+    android:background="?attr/selectableItemBackground"
+    android:focusable="true">
 
-    <TextView
-        android:id="@+id/title"
-        android:textAppearance="@android:style/TextAppearance.Material.Title"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Ok"/>
-    <TextView
-        android:id="@+id/subtitle"
-        android:textAppearance="@android:style/TextAppearance.Material.Body1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Nookay"/>
+        android:gravity="center">
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/infoViewTitle"
+            android:textAppearance="@android:style/TextAppearance.Material.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Ok"/>
+        <TextView
+            android:id="@+id/infoViewSubtitle"
+            android:textAppearance="@android:style/TextAppearance.Material.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Nookay"/>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
