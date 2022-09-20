@@ -57,7 +57,8 @@ class PokemonDetailFragment : Fragment() {
         pokemonStatsView.adapter = pokeStatsAdapter
         pokemonRepository.registerObserver(viewLifecycleOwner.lifecycle)
         pokemonRepository.getSpecificPokemon(pokemon).observe(viewLifecycleOwner) {
-            Log.i("SPECIFIC", it.toString())
+            pokeStatsAdapter.setPokeStats(stats=it,
+                reloadData=true)
         }
     }
 }
