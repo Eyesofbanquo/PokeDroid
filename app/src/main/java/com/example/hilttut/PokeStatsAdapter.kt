@@ -33,7 +33,7 @@ class PokeStatsAdapter: RecyclerView.Adapter<PokeStatsView>() {
         holder.subtitle.text = "Goodbye"
     }
 
-    override fun getItemCount(): Int = 5
+    override fun getItemCount(): Int = 40
 
     @Provides
     fun makePokeStatsAdapter(): PokeStatsAdapter {

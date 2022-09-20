@@ -47,5 +47,6 @@ class PokemonDetailFragment : Fragment() {
 
         pokemonStatsView = view.findViewById(R.id.pokemonStatsView)
         pokemonStatsView.layoutManager = GridLayoutManager(view.context, 2)
+        pokemonStatsView.adapter = pokeStatsAdapter
     }
 }
