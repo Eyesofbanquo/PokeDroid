@@ -7,22 +7,23 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.navigation.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.hilttut.model.Pokemon
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val POKEMON_PARAM  = "pokemon"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [PokemonDetailFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+@AndroidEntryPoint
 class PokemonDetailFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private lateinit var pokemon: Pokemon
     private lateinit var pokemonStatsView: RecyclerView
+
+    @Inject lateinit var pokeStatsAdapter: PokeStatsAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,5 +46,6 @@ class PokemonDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         pokemonStatsView = view.findViewById(R.id.pokemonStatsView)
+        pokemonStatsView.layoutManager = GridLayoutManager(view.context, 2)
     }
 }
