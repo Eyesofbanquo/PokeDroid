@@ -39,7 +39,7 @@ class PokeStatsAdapter: RecyclerView.Adapter<PokeDetailView>() {
 
     companion object {
         const val HEADER = 0
-        const val ROW = 0
+        const val ROW = 1
     }
 
     private var _data: List<PokeStat> = listOf()
