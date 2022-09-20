@@ -16,8 +16,13 @@ import dagger.hilt.android.components.FragmentComponent
 import javax.inject.Qualifier
 
 class PokeDetailView(private val view: View): RecyclerView.ViewHolder(view) {
-    fun bindHeader() {
-
+    fun bindHeader(pokemonImageUrl: String) {
+        if (pokemonImageUrl.isNullOrEmpty()) return
+        val imageView: ImageView = view.findViewById(R.id.pokemonHeaderImageView)
+        imageView.load(pokemonImageUrl) {
+            crossfade(true)
+            placeholder(R.drawable.ic_launcher_background)
+        }
     }
     fun bindContent(titleString: String, subtitleString: String) {
         val title: TextView = view.findViewById(R.id.title)
@@ -32,17 +37,18 @@ class PokeDetailView(private val view: View): RecyclerView.ViewHolder(view) {
 @InstallIn(FragmentComponent::class)
 class PokeStatsAdapter: RecyclerView.Adapter<PokeDetailView>() {
 
-    enum class ViewType(val value: Int) {
-        HEADER(0),
-        CONTENT(1)
+    companion object {
+        const val HEADER = 0
+        const val ROW = 0
     }
 
     private var _data: List<PokeStat> = listOf()
+    private var headerUrl: String = ""
 
     override fun onCreateViewHolder(parent: ViewGroup,
                                     viewType: Int): PokeDetailView {
         val layoutToInflate = when (viewType) {
-            0 -> R.layout.pokemon_detail_header
+            HEADER -> R.layout.pokemon_detail_header
             else -> R.layout.info_view
         }
         val layout = LayoutInflater.from(parent.context)
@@ -52,23 +58,21 @@ class PokeStatsAdapter: RecyclerView.Adapter<PokeDetailView>() {
 
     override fun onBindViewHolder(holder: PokeDetailView,
                                   position: Int) {
-        if (position == 0) {
-
+        if (position == HEADER) {
+            holder.bindHeader(headerUrl)
         } else {
-            val stat = _data[position-1]
+            val stat = _data[position-ROW]
             holder.bindContent(stat.stat.name, stat.baseStat)
         }
-//        holder.title.text = stat.stat.name
-//        holder.subtitle.text = stat.baseStat
     }
 
     override fun getItemCount(): Int = _data.count() + 1
 
     override fun getItemViewType(position: Int): Int {
         if (position == 0) {
-            return 0
+            return HEADER
         }
-        return 1
+        return ROW
     }
 
     /**
@@ -83,6 +87,11 @@ class PokeStatsAdapter: RecyclerView.Adapter<PokeDetailView>() {
         if (reloadData) {
             notifyDataSetChanged()
         }
+    }
+
+    fun setPokeHeader(headerUrlString: String) {
+        headerUrl = headerUrlString
+        notifyDataSetChanged()
     }
 
     @Provides

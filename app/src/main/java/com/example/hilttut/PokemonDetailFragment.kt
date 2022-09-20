@@ -21,20 +21,23 @@ import javax.inject.Inject
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val POKEMON_PARAM  = "pokemon"
+private const val POKEMON_IMAGE_PARAM = "pokemonImageUrl"
 
 @AndroidEntryPoint
 class PokemonDetailFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private lateinit var pokemon: Pokemon
+    private lateinit var pokemonUrl: String
     private lateinit var pokemonStatsView: RecyclerView
 
     @Inject lateinit var pokeStatsAdapter: PokeStatsAdapter
     @Inject lateinit var pokemonRepository: PokemonRepository
-    
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             pokemon = it.get(POKEMON_PARAM) as Pokemon
+            pokemonUrl = it.get(POKEMON_IMAGE_PARAM) as String
         }
     }
 
@@ -58,7 +61,8 @@ class PokemonDetailFragment : Fragment() {
             gridLayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
             override fun getSpanSize(position: Int): Int {
                 return when (pokeStatsAdapter.getItemViewType(position)){
-                    0 -> 2
+                    PokeStatsAdapter.HEADER -> 2
+                    PokeStatsAdapter.ROW -> 1
                     else ->  1
                 }
             }
@@ -72,6 +76,7 @@ class PokemonDetailFragment : Fragment() {
         pokemonRepository.getSpecificPokemon(pokemon).observe(viewLifecycleOwner) {
             pokeStatsAdapter.setPokeStats(stats=it,
                 reloadData=true)
+            pokeStatsAdapter.setPokeHeader(pokemonUrl)
         }
     }
 }
