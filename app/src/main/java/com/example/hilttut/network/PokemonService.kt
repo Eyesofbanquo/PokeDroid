@@ -12,7 +12,7 @@ interface PokemonService {
     suspend fun getPokemon(): Response<AllPokemonResponse>
     @GET("/api/v2/pokemon-form/{id}")
     suspend fun getSpecificPokemonForm(@Path("id") id: String): Response<PokemonFormResponse>
-    @GET("/api/v2/{pokemon}")
+    @GET("/api/v2/pokemon/{pokemon}")
     suspend fun getSpecificPokemon(@Path("pokemon") pokemon: String): Response<PokeStats>
 }
 
