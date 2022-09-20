@@ -1,20 +1,14 @@
 package com.example.hilttut
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.core.widget.NestedScrollView
-import androidx.navigation.findNavController
-import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.hilttut.model.Pokemon
 import com.example.hilttut.network.PokemonRepository
-import com.example.hilttut.network.PokemonService
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
