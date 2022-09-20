@@ -8,7 +8,12 @@
         android:id="@+id/listFragment2"
         android:name="com.example.hilttut.ListFragment"
         android:label="@string/list_activity_title"
-        tools:layout="@layout/fragment_list" />
+        tools:layout="@layout/fragment_list" >
+        <action
+            android:id="@+id/action_listFragment2_to_pokemonDetailFragment"
+            app:destination="@id/pokemonDetailFragment"
+            app:popUpTo="@id/listFragment2" />
+    </fragment>
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.example.hilttut.MainFragment"
@@ -21,5 +26,16 @@
             app:exitAnim="@android:anim/fade_out"
             app:popUpTo="@id/mainFragment"
             app:popUpToInclusive="false" />
+    </fragment>
+    <fragment
+        android:id="@+id/pokemonDetailFragment"
+        android:name="com.example.hilttut.PokemonDetailFragment"
+        android:label="@string/pokemon_detail_label"
+        tools:layout="@layout/fragment_pokemon_detail" >
+        <argument android:name="pokemon"
+            app:argType="com.example.hilttut.model.Pokemon" />
+        <argument
+            android:name="label"
+            app:argType="string" />
     </fragment>
 </navigation>

@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.hilttut.model.Pokemon
@@ -37,17 +37,16 @@ class LFAdapter: RecyclerView.Adapter<LFViewHolder>() {
 
         val textView = holder.textView
         val imageView = holder.imageView
-
         imageView.load(pokemonImageUrl) {
             crossfade(true)
             placeholder(R.drawable.ic_launcher_background)
         }
         textView.text = holder.itemView.context.getString(R.string.pokemonName, pokemon.name)
         holder.itemView.setOnClickListener {
-            Toast.makeText(holder.itemView.context,
-                "You've selected $pokemon.name",
-                Toast.LENGTH_SHORT)
-                .show()
+            val action = ListFragmentDirections
+                .actionListFragment2ToPokemonDetailFragment(pokemon=pokemon,
+                    label=pokemon.name.uppercase())
+            it.findNavController().navigate(action)
         }
     }
 
