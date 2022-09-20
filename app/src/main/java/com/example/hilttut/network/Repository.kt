@@ -2,6 +2,7 @@ package com.example.hilttut.network
 
 import android.util.Log
 import androidx.lifecycle.*
+import com.example.hilttut.model.PokeStat
 import com.example.hilttut.model.Pokemon
 import com.example.hilttut.network.repositories.PokeApiRepository
 import dagger.Binds
@@ -21,6 +22,7 @@ class PokemonRepository @Inject constructor(
 
     // region Properties
     private var pokemon = MutableLiveData<List<Pokemon>>()
+    private var pokeStats = MutableLiveData<List<PokeStat>>()
     private val job: Job = Job()
     // endregion
 
@@ -71,6 +73,15 @@ class PokemonRepository @Inject constructor(
         pokemon.value = pokemons
     }
 
+    private suspend fun getPokemon(pokemon: Pokemon) {
+        val pokeStats = withContext(Dispatchers.IO) {
+            val result = pokemonService.getSpecificPokemon(pokemon.name)
+            result.body()
+        }
+
+        this.pokeStats.value = pokeStats?.stats ?: listOf()
+    }
+
     private fun cancelJob() {
         if (job.isActive) {
             job.cancel()
@@ -84,6 +95,10 @@ class PokemonRepository @Inject constructor(
         return pokemon
     }
 
+    override fun getSpecificPokemon(pokemon: Pokemon): LiveData<List<PokeStat>> {
+        launch { getPokemon(pokemon) }
+        return pokeStats
+    }
     override fun registerObserver(lifecycle: Lifecycle){
         lifecycle.addObserver(this)
     }
