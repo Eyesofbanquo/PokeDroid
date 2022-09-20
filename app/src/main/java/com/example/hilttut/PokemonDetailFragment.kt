@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.navigation.findNavController
+import androidx.recyclerview.widget.RecyclerView
 import com.example.hilttut.model.Pokemon
 
 // TODO: Rename parameter arguments, choose names that match
@@ -21,8 +22,7 @@ private const val POKEMON_PARAM  = "pokemon"
 class PokemonDetailFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private lateinit var pokemon: Pokemon
-
-    private lateinit var pokemonNameTextView: TextView
+    private lateinit var pokemonStatsView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,8 +44,6 @@ class PokemonDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        pokemonNameTextView = view.findViewById(R.id.pokemonNameTextView)
-        pokemonNameTextView.text = pokemon.name
-        view.findNavController().currentDestination?.label = pokemon.name
+        pokemonStatsView = view.findViewById(R.id.pokemonStatsView)
     }
 }
