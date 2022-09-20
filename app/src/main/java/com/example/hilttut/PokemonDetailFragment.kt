@@ -7,7 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.widget.NestedScrollView
 import androidx.navigation.findNavController
+import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.hilttut.model.Pokemon
@@ -28,10 +30,7 @@ class PokemonDetailFragment : Fragment() {
 
     @Inject lateinit var pokeStatsAdapter: PokeStatsAdapter
     @Inject lateinit var pokemonRepository: PokemonRepository
-
-    init {
-    }
-
+    
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -53,8 +52,22 @@ class PokemonDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         pokemonStatsView = view.findViewById(R.id.pokemonStatsView)
-        pokemonStatsView.layoutManager = GridLayoutManager(view.context, 2)
-        pokemonStatsView.adapter = pokeStatsAdapter
+
+        pokemonStatsView.apply {
+            val gridLayoutManager = GridLayoutManager(view.context, 2)
+            gridLayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+            override fun getSpanSize(position: Int): Int {
+                return when (pokeStatsAdapter.getItemViewType(position)){
+                    0 -> 2
+                    else ->  1
+                }
+            }
+        }
+            this.layoutManager = gridLayoutManager
+            this.adapter = pokeStatsAdapter
+            this.isNestedScrollingEnabled = false
+        }
+
         pokemonRepository.registerObserver(viewLifecycleOwner.lifecycle)
         pokemonRepository.getSpecificPokemon(pokemon).observe(viewLifecycleOwner) {
             pokeStatsAdapter.setPokeStats(stats=it,
