@@ -7,5 +7,5 @@ import retrofit2.http.Url
 
 interface UrlService {
     @GET
-    suspend fun loadUrl(@Url urlString: String): Response<AllPokemonResponse>
+    suspend fun loadAllPokemonUrl(@Url urlString: String): Response<AllPokemonResponse>
 }

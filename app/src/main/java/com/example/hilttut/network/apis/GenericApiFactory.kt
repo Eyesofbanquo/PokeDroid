@@ -20,7 +20,7 @@ object GenericApiFactory {
 
     @Provides
     fun makeGenericService(): UrlService {
-        getInstance()
+        return getInstance()
             .create(UrlService::class.java)
     }
 }
